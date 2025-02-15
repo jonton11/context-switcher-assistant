@@ -1,6 +1,7 @@
 import subprocess
 import os
 import logging
+import argparse
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -36,11 +37,16 @@ def append_to_last_session(summary, filename='last_working_session.md'):
     with open(filename, 'a') as session_file:
         session_file.write("\n" + summary)
 
-def main():
+def main(manual=False):
     """Main function to execute the summary generation and storage."""
+    if manual:
+        logging.info("Running in manual mode.")
     commit_hash, commit_message, diff = get_commit_info()
     summary = generate_summary(commit_hash, commit_message, diff)
     append_to_last_session(summary)
 
 if __name__ == "__main__":
-    main() 
+    parser = argparse.ArgumentParser(description="Generate commit summaries.")
+    parser.add_argument('--manual', action='store_true', help="Run the script manually.")
+    args = parser.parse_args()
+    main(manual=args.manual) 

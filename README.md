@@ -75,3 +75,30 @@ Context Switcher Assistant leverages the Model Context Protocol (MCP) to create 
 - Ruff for linting and formatting
 - Pytest for testing
 - GitHub Actions for CI/CD
+
+## Usage Instructions
+
+To automatically generate summaries of your commits and store them in `last_working_session.md`, follow these steps:
+
+1. **Set Up the Python Script**:
+   - Ensure the `generate_summary.py` script is in your project directory.
+
+2. **Configure the Git Hook**:
+   - Navigate to your `.git/hooks` directory.
+   - Create a `post-commit` file and make it executable:
+     ```bash
+     touch .git/hooks/post-commit
+     chmod +x .git/hooks/post-commit
+     ```
+   - Add the following line to the `post-commit` file:
+     ```bash
+     #!/bin/sh
+     python3.11 /path/to/your/generate_summary.py
+     ```
+   - Replace `/path/to/your/generate_summary.py` with the actual path to your script.
+
+3. **Test the Setup**:
+   - Make a commit in your repository.
+   - Check the `last_working_session.md` file to see if the summary is appended correctly.
+
+This setup will ensure that every time you make a commit, a summary of the changes is automatically generated and stored, helping you keep track of your work sessions efficiently.
