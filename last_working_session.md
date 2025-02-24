@@ -1,36 +1,36 @@
 # Commit Summary
 
-**Time**: 2025-02-23T20:31:40.134811
-**Commit**: 718886d678cd38125d3844cd2e289091fbb5cc26
-**Message**: Merge pull request #4 from jonton11/features/integrate-ai
-
-feat: Add LLM integration to parse last_working_session.md into digestable format
+**Time**: 2025-02-23T21:01:13.923717
+**Commit**: 0ac7a8bcaf77c369bac551c5f5b23de320e7f550
+**Message**: chore: Update README with setup instructions and OpenAI integration
 
 ## Analysis
 
-### Summary of Commit `718886d678cd38125d3844cd2e289091fbb5cc26`
+### Summary of Commit `0ac7a8bcaf77c369bac551c5f5b23de320e7f550`
 
-#### What Changed:
-- **New Files Added:**
-  - **`.env.example`**: A template for environment variables, specifically including `OPENAI_API_KEY`.
-  - **`ai_summarizer.py`**: A new module that integrates with OpenAI's API to generate enhanced summaries of git commits using AI.
-  - **`requirements.txt`**: A new file listing dependencies, specifically `openai` and `python-dotenv`.
+#### 1. What Changed
+- **File Modified**: `README.md`
+- **Content Updates**:
+  - The description of the tool was updated to emphasize its AI capabilities, changing "detailed summaries" to "AI-enhanced summaries."
+  - The feature list was revised:
+    - Changed "Automatic Commit Summaries" to "AI-Powered Commit Analysis," highlighting the use of GPT-4o-mini for analyzing commit changes.
+    - Enhanced the description of the summary generation process to include explanations of what changed and the technical impact.
+  - The section title "Usage Instructions" was renamed to "Setup Instructions" to better reflect the content.
+  - Added detailed setup steps for configuring the OpenAI API, including:
+    - Installing dependencies.
+    - Copying and editing the `.env` file to include the OpenAI API key.
+    - Setting up the Git hook to automate summary generation.
+  - Clarified the usage section to explain how the tool operates post-setup, including the automatic generation of summaries after commits and the option to run the script manually.
 
-- **Modifications in Existing Files:**
-  - **`commit_formatter.py`**: 
-    - Updated to utilize the new AI summarization feature. 
-    - The function `write_commit_summary` now calls `get_enhanced_summary` to generate a summary of the commit using AI, rather than just writing the diff directly.
-    - The output format has been adjusted to include an AI-generated analysis section.
+#### 2. Why These Changes Were Made
+- The commit message indicates a focus on improving the documentation to better guide users in setting up the tool and understanding its functionality.
+- The updates aim to clarify the integration of OpenAI's GPT-4o-mini, making it clear that the tool not only summarizes commits but also provides intelligent insights into the changes made.
+- By restructuring the README, the author intends to enhance user experience and facilitate easier onboarding for new developers.
 
-#### Why These Changes Were Made:
-- The primary goal of this commit is to enhance the commit summary generation process by integrating AI capabilities. This allows for more insightful and detailed summaries that can help developers understand the changes made in a commit without needing to analyze the raw diff manually.
-- The addition of the `.env.example` file provides a clear guideline for developers on how to set up their environment for using the OpenAI API.
-- The `requirements.txt` file ensures that all necessary dependencies are documented for easy installation.
-
-#### Technical Impact and Considerations:
-- **Dependency on OpenAI API**: The new functionality requires an API key for OpenAI, which must be set in the environment. Developers need to ensure they have access to this API and manage their keys securely.
-- **Error Handling**: The code includes basic error handling for missing environment variables and API call failures, but further enhancements could be made to improve robustness.
-- **Backward Compatibility**: The existing functionality of writing commit summaries is preserved, but now enhanced with AI analysis, ensuring that current users of the `commit_formatter.py` will not experience disruptions.
-- **Potential for Future Enhancements**: This integration opens the door for further AI-driven features, such as more complex analyses or different formats for summaries, which could be beneficial for larger teams or projects.
-
-Overall, this commit significantly improves the commit documentation process by leveraging AI, making it easier for developers to understand changes and their implications.
+#### 3. Technical Impact and Considerations
+- **Integration of OpenAI**: The addition of GPT-4o-mini for commit analysis introduces a dependency on OpenAI's API, which requires users to manage API keys securely.
+- **User Experience**: The clearer setup instructions and enhanced feature descriptions are likely to improve user adoption and satisfaction with the tool.
+- **Potential Considerations**:
+  - Developers need to ensure they have the correct version of Python (3.11+) and the necessary dependencies installed.
+  - Users must be aware of the need to configure their environment correctly to utilize the OpenAI integration effectively.
+  - The automatic generation of summaries may lead to increased API usage, which could have cost implications depending on the pricing model of OpenAI's services.

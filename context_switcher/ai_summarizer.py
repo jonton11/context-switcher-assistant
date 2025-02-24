@@ -1,16 +1,12 @@
 import os
 from openai import OpenAI
-from dotenv import load_dotenv
-
-# Load environment variables from .env file
-load_dotenv()
 
 def get_enhanced_summary(commit_hash, commit_message, diff):
     """Generate an enhanced summary of the commit using GPT-4."""
     try:
         api_key = os.getenv('OPENAI_API_KEY')
         if not api_key:
-            return "Error: OPENAI_API_KEY environment variable not set"
+            return "Error: OPENAI_API_KEY not set. Please add 'export OPENAI_API_KEY=your_api_key_here' to your ~/.zshrc or ~/.bashrc"
             
         client = OpenAI(api_key=api_key)
         
