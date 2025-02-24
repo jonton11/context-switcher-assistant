@@ -30,7 +30,7 @@ def get_enhanced_summary(commit_hash, commit_message, diff):
         Format the response in clear markdown bullet points."""
 
         response = client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": "You are a senior developer analyzing git commits. Be thorough but concise, focusing on what other developers need to know."},
                 {"role": "user", "content": prompt}
