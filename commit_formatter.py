@@ -1,22 +1,26 @@
 import os
 from datetime import datetime
+from ai_summarizer import get_enhanced_summary
 
 SUMMARY_FILE = 'last_working_session.md'  # Keep filename for backwards compatibility
 
 def write_commit_summary(commit_hash, commit_message, diff):
-    """Generate and write a summary of the latest commit.
-    
-    The diff will include all files changed in this commit. The output is formatted
-    as a markdown file with the commit hash, message, timestamp, and a diff section
-    showing all file changes.
-    """
+    """Generate and write a summary of the latest commit using AI analysis."""
     if not commit_hash or not commit_message or not diff:
         print("Error: Missing commit information")
         return
     
+    # Get AI-enhanced summary
+    if not os.getenv('OPENAI_API_KEY'):
+        print("Error: OPENAI_API_KEY not set")
+        return
+
+    ai_summary = get_enhanced_summary(commit_hash, commit_message, diff)
+
     with open(SUMMARY_FILE, 'w') as summary_file:
-        summary_file.write("# Latest Commit Summary\n\n")
-        summary_file.write(f"**Time**: {datetime.now().isoformat()}\n\n")
-        summary_file.write(f"**Commit**: {commit_hash}\n\n")
+        summary_file.write("# Commit Summary\n\n")
+        summary_file.write(f"**Time**: {datetime.now().isoformat()}\n")
+        summary_file.write(f"**Commit**: {commit_hash}\n")
         summary_file.write(f"**Message**: {commit_message}\n\n")
-        summary_file.write(f"**Changes**:\n```diff\n{diff}\n```\n") 
+        summary_file.write("## Analysis\n\n")
+        summary_file.write(f"{ai_summary}\n")
