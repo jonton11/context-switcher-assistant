@@ -1,6 +1,6 @@
 import os
 from datetime import datetime
-from ai_summarizer import get_enhanced_summary
+from .ai_summarizer import get_enhanced_summary
 
 SUMMARY_FILE = 'last_working_session.md'  # Keep filename for backwards compatibility
 
@@ -8,11 +8,6 @@ def write_commit_summary(commit_hash, commit_message, diff):
     """Generate and write a summary of the latest commit using AI analysis."""
     if not commit_hash or not commit_message or not diff:
         print("Error: Missing commit information")
-        return False
-    
-    # Get AI-enhanced summary
-    if not os.getenv('OPENAI_API_KEY'):
-        print("Error: OPENAI_API_KEY not set")
         return False
 
     print("Generating AI summary...")
@@ -30,4 +25,4 @@ def write_commit_summary(commit_hash, commit_message, diff):
         summary_file.write("## Analysis\n\n")
         summary_file.write(f"{ai_summary}\n")
     
-    return True
+    return True 

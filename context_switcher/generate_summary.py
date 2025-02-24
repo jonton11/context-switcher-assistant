@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-from git_utils import get_latest_commit_info
-from commit_formatter import write_commit_summary
+from .git_utils import get_latest_commit_info
+from .commit_formatter import write_commit_summary
 from colorama import init, Fore
 init()  # Initialize colorama
 

@@ -2,7 +2,57 @@
 
 A developer tool that helps engineers track their work by providing AI-enhanced summaries of their commits.
 
-## Problem Statement
+## Quick Start
+
+### Installation
+
+Install directly from GitHub:
+```bash
+pip install git+https://github.com/jonton11/context-switcher-assistant.git
+```
+
+### Setup
+
+1. **Configure OpenAI API**:
+   ```bash
+   # Add to your ~/.zshrc or ~/.bashrc
+   export OPENAI_API_KEY=your_api_key_here
+
+   # Then reload your shell configuration
+   source ~/.zshrc  # or source ~/.bashrc
+   ```
+
+### Usage
+
+The tool can be run manually to analyze your latest commit:
+```bash
+context-switcher
+```
+
+This will:
+1. Analyze the latest commit using GPT-4o-mini
+2. Generate a detailed summary including:
+   - What changed (specific files and functionality)
+   - Why changes were made
+   - Technical impact and considerations
+3. Save the summary to `last_working_session.md`
+
+### Automatic Usage (Optional)
+
+You can set up a git hook to run automatically after each commit:
+```bash
+# Navigate to your project's .git/hooks directory
+cd .git/hooks
+
+# Create and make the post-commit hook executable
+echo '#!/bin/sh
+context-switcher' > post-commit
+chmod +x post-commit
+```
+
+## Project Overview
+
+### Problem Statement
 
 I'm looking to alleviate the frustrations with context switching at work:
 
@@ -16,7 +66,7 @@ I'm looking to alleviate the frustrations with context switching at work:
    - Reconstructing the reasoning behind decisions
    - Getting back into the flow of complex work
 
-## Solution
+### Solution
 
 Context Switcher Assistant creates intelligent, readable summaries of your commits:
 
@@ -30,7 +80,7 @@ Context Switcher Assistant creates intelligent, readable summaries of your commi
    - Bullet-point summaries
    - Focused on what developers need to know
 
-## Technical Stack
+## Technical Details
 
 ### Core Technologies
 - Python 3.11+
@@ -39,53 +89,7 @@ Context Switcher Assistant creates intelligent, readable summaries of your commi
 - Markdown for readable output
 
 ### Project Structure
-- `generate_summary.py` - Main entry point
-- `git_utils.py` - Git operations
-- `commit_formatter.py` - Markdown formatting
-- `ai_summarizer.py` - GPT-4o-mini integration
-
-## Setup Instructions
-
-1. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-2. **Configure OpenAI API**:
-   ```bash
-   # Copy example env file
-   cp .env.example .env
-   
-   # Edit .env and add your OpenAI API key
-   OPENAI_API_KEY=your_api_key_here
-   ```
-
-3. **Set Up Git Hook**:
-   ```bash
-   # Navigate to your .git/hooks directory
-   cd .git/hooks
-   
-   # Create and make the post-commit hook executable
-   touch post-commit
-   chmod +x post-commit
-   
-   # Add the following to post-commit:
-   #!/bin/sh
-   python3.11 /path/to/your/generate_summary.py
-   ```
-   Replace `/path/to/your/generate_summary.py` with the actual path to the script.
-
-## Usage
-
-After setup, the tool automatically runs after each commit:
-1. Analyzes the commit changes using GPT-4o-mini
-2. Generates a detailed summary including:
-   - What changed (specific files and functionality)
-   - Why changes were made
-   - Technical impact and considerations
-3. Saves the summary to `last_working_session.md`
-
-You can also run it manually:
-```bash
-python3.11 generate_summary.py
-```
+- `generate_summary.py` - Main entry point and CLI interface
+- `git_utils.py` - Git operations and commit handling
+- `commit_formatter.py` - Markdown formatting and file writing
+- `ai_summarizer.py` - GPT-4o-mini integration and prompt handling
