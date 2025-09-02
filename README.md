@@ -1,6 +1,6 @@
 # Context Switcher Assistant
 
-A developer tool that helps engineers track their work by providing AI-enhanced summaries of their commits.
+A developer tool that helps engineers track their work by providing AI-enhanced summaries of their commits. This helps a lot especially during the AI-assisted era when context of work may be lost after ending a session with an agent/AI tool.
 
 ## Quick Start
 
